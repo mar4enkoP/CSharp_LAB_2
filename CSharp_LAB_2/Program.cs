@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CSharp_LAB_2
 {
@@ -7,7 +8,7 @@ namespace CSharp_LAB_2
     {
         public static void Main(string[] args)
         {
-            Task123();
+            Task130();
         }
 
         /// <summary>
@@ -81,6 +82,51 @@ namespace CSharp_LAB_2
             {
                 Console.WriteLine($"No more numbers {M} in the sequence.");
             }
+        }
+        
+        /// <summary>
+        ///  130 : Даны целые положительные числа а1, а2, ..., an.
+        ///        Найти среди них те, которые являются квадратами некоторого числа m.
+        /// </summary>
+        static void Task130()
+        {
+            int[] a = GenerateRandomArray();
+
+            int[] squareNumbers = FindSquareNumbers(a);
+
+            if (squareNumbers.Length > 0)
+            {
+                Console.WriteLine("Numbers that are squares of a number m:");
+                Console.WriteLine(string.Join(", ", squareNumbers));
+            }
+            else
+            {
+                Console.WriteLine("There are no numbers in the array that are squares of some number m.");
+            }
+        }
+        ///<summary>
+        ///принимает массив целых положительных чисел numbers и находит числа, являющиеся квадратами
+        ///</summary>
+        static int[] FindSquareNumbers(int[] numbers)
+        {
+            int[] squares = new int[numbers.Length];
+            int count = 0;
+
+            foreach (int num in numbers)
+            {
+                int sqrt = (int)Math.Sqrt(num);
+                if (sqrt * sqrt == num)
+                {
+                    squares[count] = num;
+                    count++;
+                }
+            }
+
+            // Create a new array with the actual size and copy numbers
+            int[] result = new int[count];
+            Array.Copy(squares, result, count);
+
+            return result;
         }
     }
 }
