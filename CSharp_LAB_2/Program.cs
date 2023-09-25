@@ -8,7 +8,7 @@ namespace CSharp_LAB_2
     {
         public static void Main(string[] args)
         {
-         Task149();
+         Task186();
         }
 
         /// <summary>
@@ -19,8 +19,7 @@ namespace CSharp_LAB_2
         /// <param name="length">Длина массива (по умолчанию 10).</param>
         /// <param name="allowDuplicates">Разрешить повторение элементов (по умолчанию true)</param>
         /// <returns>Случайный массив целых чисел.</returns>
-        static int[] GenerateRandomArray(int minValue = 1, int maxValue = 100, int length = 10,
-            bool allowDuplicates = true)
+        static int[] GenerateRandomArray(int minValue = 1, int maxValue = 100, int length = 10, bool allowDuplicates = true)
         {
             Random random = new();
             //check input valu
@@ -166,5 +165,30 @@ namespace CSharp_LAB_2
                 Console.WriteLine("Not all members of the second sequence are in the first sequence.");
             }
         }
+
+        /// <summary>
+        ///  186: В одномерном массиве все отрицательные элементы переместить в начало массива,
+        ///       а остальные — в конец с сохранением порядка следования.
+        ///       Дополнительный массив использовать не разрешается
+        /// </summary>
+        static void Task186()
+        {
+            int[] array = GenerateRandomArray(-50, 50);
+            
+            int negativeIndex = 0;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] < 0)
+                {
+                    (array[i], array[negativeIndex]) = (array[negativeIndex], array[i]);
+                    negativeIndex++;
+                }
+            }
+
+            Console.WriteLine("Array with negative elements at the beginning:");
+            Console.WriteLine(string.Join(", ", array));
+        }
+        
     }
 }
