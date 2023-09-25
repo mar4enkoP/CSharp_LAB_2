@@ -8,7 +8,30 @@ namespace CSharp_LAB_2
     {
         public static void Main(string[] args)
         {
-         Task186();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nTask: 123");
+            Console.ResetColor(); // Сброс цвета текста в стандартный (белый)
+            Task123();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nTask: 130");
+            Console.ResetColor();
+            Task130();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nTask: 149");
+            Console.ResetColor();
+            Task149();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nTask: 186");
+            Console.ResetColor();
+            Task186();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nTask: 37");
+            Console.ResetColor();
+            Task37();
         }
 
         /// <summary>
@@ -19,7 +42,8 @@ namespace CSharp_LAB_2
         /// <param name="length">Длина массива (по умолчанию 10).</param>
         /// <param name="allowDuplicates">Разрешить повторение элементов (по умолчанию true)</param>
         /// <returns>Случайный массив целых чисел.</returns>
-        static int[] GenerateRandomArray(int minValue = 1, int maxValue = 100, int length = 10, bool allowDuplicates = true)
+        static int[] GenerateRandomArray(int minValue = 1, int maxValue = 100, int length = 10,
+            bool allowDuplicates = true)
         {
             Random random = new();
             //check input valu
@@ -51,9 +75,9 @@ namespace CSharp_LAB_2
                     array[i] = value;
                 }
             }
-
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Array : [" + string.Join(", ", array) + "]");
-
+            Console.ResetColor();
             return array;
         }
 
@@ -174,7 +198,7 @@ namespace CSharp_LAB_2
         static void Task186()
         {
             int[] array = GenerateRandomArray(-50, 50);
-            
+
             int negativeIndex = 0;
 
             for (int i = 0; i < array.Length; i++)
@@ -189,6 +213,42 @@ namespace CSharp_LAB_2
             Console.WriteLine("Array with negative elements at the beginning:");
             Console.WriteLine(string.Join(", ", array));
         }
-        
+
+        /// <summary>
+        ///  37: Даны натуральные числа а1, а2, ..., an.
+        ///      Указать те из них, у кот. остаток от деления на М равен L (0 ≤ L ≤ M – 1).
+        /// </summary>
+        static void Task37()
+        {
+            int[] array = GenerateRandomArray();
+            int M = 5;
+            int L = 2;
+
+            Console.WriteLine(
+                $"The remainder of division by {M} is {L}: {string.Join(", ", FindNumbersWithRemainder(array, M, L))}");
+        }
+
+        ///<summary>
+        ///метод для нахождения чисел, удовлетворяющих условию остатка от деления на M равного L
+        ///</summary>
+        static int[] FindNumbersWithRemainder(int[] array, int M, int L)
+        {
+            int[] result = new int[array.Length];
+            int count = 0;
+
+            foreach (int num in array)
+            {
+                if (num % M == L)
+                {
+                    result[count] = num;
+                    count++;
+                }
+            }
+
+            int[] filteredNumbers = new int[count];
+            Array.Copy(result, filteredNumbers, count);
+
+            return filteredNumbers;
+        }
     }
 }
